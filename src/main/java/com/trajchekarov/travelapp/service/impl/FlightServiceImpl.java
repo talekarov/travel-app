@@ -34,6 +34,18 @@ public class FlightServiceImpl implements FlightService {
                         f.getAvailableSeats() >= flightRequestBody.getNumPassengers())
                 .collect(Collectors.toList());
 
-        return ConvertUtils.convertToFlightResponseBodies(flights);
+        return ConvertUtils.convertToFlightResponseBodies(flights, flightRequestBody.getNumPassengers());
+    }
+
+    @Override
+    public List<FlightResponseBody> getFlightsNoDate(FlightRequestBody flightRequestBody) {
+        List<FlightEntity> flights = flightRepository.findAll()
+                .stream()
+                .filter(f -> f.getOrigin().equals(flightRequestBody.getOrigin()) &&
+                        f.getDestination().equals(flightRequestBody.getDestination()) &&
+                        f.getAvailableSeats() >= flightRequestBody.getNumPassengers())
+                .collect(Collectors.toList());
+
+        return ConvertUtils.convertToFlightResponseBodies(flights, flightRequestBody.getNumPassengers());
     }
 }

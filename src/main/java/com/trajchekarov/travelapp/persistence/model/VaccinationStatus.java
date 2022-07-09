@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Builder
@@ -14,9 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Data
-public class VaccinationStatus implements Serializable {
-
-    static final long serialVersionUID = 1L;
+public class VaccinationStatus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +28,7 @@ public class VaccinationStatus implements Serializable {
 
     private Date validUntil;
 
+    @Column(nullable = false)
     private String user;
 
 }

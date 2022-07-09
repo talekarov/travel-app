@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -15,9 +14,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Entity
 @Data
-public class FlightEntity implements Serializable {
-
-    static final long serialVersionUID = 1L;
+public class FlightEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -14,8 +14,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class CountryRestrictionsResponseBody {
 
-    static final long serialVersionUID = 1L;
-
     private String country;
 
     private Restriction restrictionType;

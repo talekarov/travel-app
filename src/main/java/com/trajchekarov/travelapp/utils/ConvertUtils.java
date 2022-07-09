@@ -17,7 +17,7 @@ public final class ConvertUtils {
     private ConvertUtils() {
     }
 
-    public static FlightResponseBody convertToFlightResponseBody(FlightEntity flightEntity) {
+    public static FlightResponseBody convertToFlightResponseBody(FlightEntity flightEntity, Integer numPassengers) {
         return FlightResponseBody.builder()
                 .id(flightEntity.getId())
                 .origin(flightEntity.getOrigin())
@@ -26,15 +26,15 @@ public final class ConvertUtils {
                 .departureTime(flightEntity.getDepartureTime())
                 .arrivalDate(flightEntity.getArrivalDate())
                 .arrivalTime(flightEntity.getArrivalTime())
-                .price(flightEntity.getPrice())
+                .price(flightEntity.getPrice() * numPassengers)
                 .build();
     }
 
-    public static List<FlightResponseBody> convertToFlightResponseBodies(List<FlightEntity> flightEntities) {
-        return flightEntities.stream().map(ConvertUtils::convertToFlightResponseBody).collect(Collectors.toList());
+    public static List<FlightResponseBody> convertToFlightResponseBodies(List<FlightEntity> flightEntities, Integer numPassengers) {
+        return flightEntities.stream().map(flight -> ConvertUtils.convertToFlightResponseBody(flight, numPassengers)).collect(Collectors.toList());
     }
 
-    public static VaccinationStatusResponseBody convertToVaccinationStatusResponseBody(VaccinationStatus vaccinationStatus){
+    public static VaccinationStatusResponseBody convertToVaccinationStatusResponseBody(VaccinationStatus vaccinationStatus) {
         return VaccinationStatusResponseBody.builder()
                 .vaccinated(vaccinationStatus.getVaccinated())
                 .vaccine(vaccinationStatus.getVaccine())

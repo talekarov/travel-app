@@ -1,0 +1,27 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  application:
+    name: Spring demo
+  datasource:
+    driver-class-name: org.h2.Driver
+    password: 'tale'
+    url: jdbc:h2:mem:bootapp
+  main:
+    allow-circular-references: true
+
+server:
+  port: 9090
+
+keycloak:
+  realm: myrealm
+  auth-server-url: http://localhost:8080/realms/myrealm/protocol/openid-connect/auth
+  ssl-required: external
+  credentials:
+    secret: 88dfccfa-431a-454d-96ea-7261ae21961a
+  bearer-only: false
+  resource: flight-service
+  enable-basic-auth: true
+  use-resource-role-mappings: false
+  disable-trust-manager: true

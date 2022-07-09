@@ -5,16 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Data
-public class CountryRestrictions implements Serializable {
-
-    static final long serialVersionUID = 1L;
+public class CountryRestrictions {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

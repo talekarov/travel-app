@@ -5,14 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.Date;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class VaccinationStatusRequestBody implements Serializable {
+public class VaccinationStatusRequestBody {
 
     private Boolean vaccinated = false;
 

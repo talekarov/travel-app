@@ -4,29 +4,32 @@ import com.trajchekarov.travelapp.model.response.BookingResponseBody;
 import com.trajchekarov.travelapp.service.impl.BookingServiceImpl;
 import com.trajchekarov.travelapp.service.impl.EmailSenderServiceImpl;
 import com.trajchekarov.travelapp.utils.AuthenticationUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("api/booking")
+@Api(value = "Endpoint for booking flights")
 public class BookingController {
 
     private final BookingServiceImpl bookingService;
     private final EmailSenderServiceImpl emailSenderService;
 
     @Autowired
-    public BookingController(BookingServiceImpl bookingService, EmailSenderServiceImpl emailSenderService){
+    public BookingController(BookingServiceImpl bookingService, EmailSenderServiceImpl emailSenderService) {
         this.bookingService = bookingService;
         this.emailSenderService = emailSenderService;
     }
 
-    @PostMapping
+    @ApiOperation(value = "Book flight", response = BookingResponseBody.class)
+    @PostMapping(value = "/{id}")
     @ResponseBody
-    public BookingResponseBody bookFlight(Long flightId, Integer numPassengers){
+    public BookingResponseBody bookFlight(@PathVariable("id") Long flightId, Integer numPassengers) {
         emailSenderService.sendEmail(AuthenticationUtils.getUsername(),
                 "Booking successful",
                 "Successfully booked flight, ID: " + flightId);
-        return bookingService.bookFlight(flightId,numPassengers);
+        return bookingService.bookFlight(flightId, numPassengers);
     }
 }

@@ -10,4 +10,6 @@ public interface FlightService {
 
     List<FlightResponseBody> getFlights(FlightRequestBody flightRequestBody);
 
+    List<FlightResponseBody> getFlightsNoDate(FlightRequestBody flightRequestBody);
+
 }

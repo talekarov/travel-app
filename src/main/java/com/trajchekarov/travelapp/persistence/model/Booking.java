@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -14,9 +13,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 @Builder
-public class Booking implements Serializable {
-
-    static final long serialVersionUID = 1L;
+public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
