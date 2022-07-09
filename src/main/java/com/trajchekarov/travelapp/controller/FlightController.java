@@ -26,6 +26,8 @@ public class FlightController {
     @ApiOperation(value = "List flights from search", response = List.class)
     @ResponseBody
     public List<FlightResponseBody> findFlights(@RequestBody FlightRequestBody flightRequestBody) {
-        return flightService.getFlights(flightRequestBody);
+        if (flightRequestBody.getDestination().isBlank()) {
+            return flightService.getFlightsNoDate(flightRequestBody);
+        } else return flightService.getFlights(flightRequestBody);
     }
 }
