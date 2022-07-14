@@ -19,7 +19,7 @@ keycloak:
   auth-server-url: http://localhost:8080/realms/myrealm/protocol/openid-connect/auth
   ssl-required: external
   credentials:
-    secret: 88dfccfa-431a-454d-96ea-7261ae21961a
+    secret:
   bearer-only: false
   resource: flight-service
   enable-basic-auth: true
