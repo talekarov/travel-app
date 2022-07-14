@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/flights")
 @Api(value = "Endpoint for searching flights")
+@CrossOrigin
 public class FlightController {
 
     private final FlightServiceImpl flightService;

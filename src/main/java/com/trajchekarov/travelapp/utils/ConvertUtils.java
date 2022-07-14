@@ -31,7 +31,9 @@ public final class ConvertUtils {
     }
 
     public static List<FlightResponseBody> convertToFlightResponseBodies(List<FlightEntity> flightEntities, Integer numPassengers) {
-        return flightEntities.stream().map(flight -> ConvertUtils.convertToFlightResponseBody(flight, numPassengers)).collect(Collectors.toList());
+        return flightEntities.stream()
+                .map(flight -> ConvertUtils.convertToFlightResponseBody(flight, numPassengers))
+                .collect(Collectors.toList());
     }
 
     public static VaccinationStatusResponseBody convertToVaccinationStatusResponseBody(VaccinationStatus vaccinationStatus) {

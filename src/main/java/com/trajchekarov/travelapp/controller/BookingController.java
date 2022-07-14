@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/booking")
 @Api(value = "Endpoint for booking flights")
+@CrossOrigin
 public class BookingController {
 
     private final BookingServiceImpl bookingService;

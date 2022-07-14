@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/restrictions")
 @Api(value = "Endpoint for country restrictions")
+@CrossOrigin
 public class CountryRestrictionsController {
 
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/vstatus")
 @Api(value = "Endpoints for managing vaccination status")
+@CrossOrigin
 public class VaccinationStatusController {
 
     private final VaccinationStatusServiceImpl vaccinationStatusService;

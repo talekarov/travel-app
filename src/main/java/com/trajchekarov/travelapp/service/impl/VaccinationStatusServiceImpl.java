@@ -21,18 +21,31 @@ public class VaccinationStatusServiceImpl implements VaccinationStatusService {
     private final VaccinationStatusRepository vaccinationStatusRepository;
 
     @Autowired
-    public VaccinationStatusServiceImpl(VaccinationStatusRepository vaccinationStatusRepository){
+    public VaccinationStatusServiceImpl(VaccinationStatusRepository vaccinationStatusRepository) {
         this.vaccinationStatusRepository = vaccinationStatusRepository;
+    }
+
+    @Override
+    public VaccinationStatusResponseBody createVaccinationStatus(VaccinationStatusRequestBody vaccinationStatusRequestBody) {
+        VaccinationStatus vaccinationStatus = VaccinationStatus.builder()
+                .vaccinated(vaccinationStatusRequestBody.getVaccinated())
+                .vaccine(vaccinationStatusRequestBody.getVaccine())
+                .vaccinationDate(vaccinationStatusRequestBody.getVaccinationDate())
+                .validUntil(vaccinationStatusRequestBody.getValidUntil())
+                .user(AuthenticationUtils.getUsername())
+                .build();
+
+        vaccinationStatusRepository.save(vaccinationStatus);
+        return ConvertUtils.convertToVaccinationStatusResponseBody(vaccinationStatus);
     }
 
     @Override
     public VaccinationStatusResponseBody getVaccinationStatus() {
         String username = AuthenticationUtils.getUsername();
         Optional<VaccinationStatus> vaccinationStatus = vaccinationStatusRepository.findByUser(username);
-        if(vaccinationStatus.isPresent()) {
+        if (vaccinationStatus.isPresent()) {
             return ConvertUtils.convertToVaccinationStatusResponseBody(vaccinationStatus.get());
-        }
-        else throw new VaccinationStatusNotFoundException();
+        } else throw new VaccinationStatusNotFoundException();
     }
 
     @Override
@@ -54,21 +67,4 @@ public class VaccinationStatusServiceImpl implements VaccinationStatusService {
         }
         else throw new VaccinationStatusNotFoundException();
     }
-
-    @Override
-    public VaccinationStatusResponseBody createVaccinationStatus(VaccinationStatusRequestBody vaccinationStatusRequestBody) {
-        VaccinationStatus vaccinationStatus = VaccinationStatus.builder()
-                .vaccinated(vaccinationStatusRequestBody.getVaccinated())
-                .vaccine(vaccinationStatusRequestBody.getVaccine())
-                .vaccinationDate(vaccinationStatusRequestBody.getVaccinationDate())
-                .validUntil(vaccinationStatusRequestBody.getValidUntil())
-                .user(AuthenticationUtils.getUsername())
-                .build();
-
-        vaccinationStatusRepository.save(vaccinationStatus);
-
-        return ConvertUtils.convertToVaccinationStatusResponseBody(vaccinationStatus);
-    }
-
-
 }
